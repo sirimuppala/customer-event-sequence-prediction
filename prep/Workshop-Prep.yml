@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: LSTM-Prep-LabSetup
+Parameters: 
+  UniqueID: 
+    Type: String
+    Default: yourinitials
+    Description: Enter your initials in lower case as a unique identifier for components created 
+    AllowedPattern: "^([a-z]|(d(?!d{0,2}.d{1,3}.d{1,3}.d{1,3})))([a-zd]|(.(?!(.|-)))|(-(?!.))){1,61}[a-zd.]$"
+
+Resources:
+  SageMakerNotebookLifecycleConfig:
+    Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
+    Properties: 
+      NotebookInstanceLifecycleConfigName: "customer-event-prediction-LSTM-Lifecycle-Config"
+      OnCreate:
+        - Content: 
+            Fn::Base64: !Sub |
+                #!/bin/bash
+                set -e
+                sudo -i -u ec2-user bash << EOF
+                echo "Setup the Workshop exercises"
+                pwd
+                git clone https://github.com/aws-samples/amazon-sagemaker-devops-with-ml.git
+                pwd
+                ls -la
+                cp -R /home/ec2-user/amazon-sagemaker-devops-with-ml/1-Built-In-Algorithm/* /home/ec2-user/SageMaker/
+
+  SageMakerNotebookInstance:
+    Type: AWS::SageMaker::NotebookInstance
+    Properties: 
+      InstanceType: ml.t3.medium
+      LifecycleConfigName: "customer-event-prediction-LSTM-Lifecycle-Config"
+      NotebookInstanceName: 
+        Fn::Join:
+            - ""
+            - - "LSTM-CustomerEvent-Notebook-"
+              - !Ref UniqueID
+      RoleArn: !GetAtt [SageMakerNotebookInstanceRole, Arn]
+      
+  SageMakerNotebookInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: sagemaker.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/AmazonSageMakerFullAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      RoleName:
+        Fn::Join:
+           - ""
+           - - "SageMakerNotebookInstance-ServiceRole-AGAIN"
+             - !Ref UniqueID
+             - "-"
+             - !Select
+              - 0
+              - !Split
+               - "-"
+               - !Select
+                 - 2
+                 - !Split
+                   - "/"
+                   - !Ref "AWS::StackId"
+
+Outputs:
+      SageMakerNotebookInstance:
+        Description: The ID of the SageMaker Notebook Instance
+        Value: !Ref SageMakerNotebookInstance
