@@ -32,17 +32,17 @@ In this step, you will execute a Cloud Formation template to do some initial set
 
 ##### Detailed Steps
 
-1. Download this git repository by either cloning the repository or downloading the *zip
+1.1. Download this git repository by either cloning the repository or downloading the *zip
 
-2. Login to the [AWS Console](https://https://console.aws.amazon.com/) and enter your credentials
+1.2. Login to the [AWS Console](https://https://console.aws.amazon.com/) and enter your credentials
 
-3. Under **Services**, select search for and select [CloudFormation](https://console.aws.amazon.com/cloudformation)
+1.3. Under **Services**, select search for and select [CloudFormation](https://console.aws.amazon.com/cloudformation)
 
-4. Click **Create Stack** buttton
+1.4. Click **Create Stack** buttton
 
    ![CreateStack](images/CreateStack.png)
    
-5. Under **Select Template**:
+1.5. Under **Select Template**:
     * Click radio button next to 'Upload a template to Amazon S3', then click **Browse...**
 
     * From the local repository cloned to your machine in the detailed step 1, select the file ./prep/Workshop-Prep.yml
@@ -51,7 +51,7 @@ In this step, you will execute a Cloud Formation template to do some initial set
     
     ![CreateStack](images/CreateStack-SpecifyTemplate.png)
     
-6. Under **Specify Stack Details**, enter: 
+1.6. Under **Specify Stack Details**, enter: 
 
    * **Stack Name**: LSTM-WorkshopSetup 
 
@@ -59,19 +59,19 @@ In this step, you will execute a Cloud Formation template to do some initial set
 
    ![CreateStack](images/CreateStack-SpecifyStackDetails.png)
 
-7. Click **Next**
+1.7. Click **Next**
 
-8. Under **Options**, leave all defaults and click '**Next**'
+1.8. Under **Options**, leave all defaults and click '**Next**'
 
-9. Under **Review**, scroll to the bottom and check the checkbox acknowledging that CloudFormation might create IAM resources and custom names, then click **Create**
+1.9. Under **Review**, scroll to the bottom and check the checkbox acknowledging that CloudFormation might create IAM resources and custom names, then click **Create**
 
 ![CreateStack](images/CreateStack-IAMCapabilities.png)
 
-10. You will be returned to the CloudFormation console and will see your stack status '**CREATE_IN_PROGRESS**'
+1.10. You will be returned to the CloudFormation console and will see your stack status '**CREATE_IN_PROGRESS**'
 
 ![CreateStack](images/CreateStack-CreateInProgress.png)
 
-11. After a few minutes, you will see your stack Status change to '**CREATE_COMPLETE**'.  You're encouraged to go explore the resources created as part of this initial setup. 
+1.11. After a few minutes, you will see your stack Status change to '**CREATE_COMPLETE**'.  You're encouraged to go explore the resources created as part of this initial setup. 
 
 
 #### Step 2 - Build, train and deploy LSTM Model
@@ -80,14 +80,14 @@ To train, deploy the LSTM model and make predictions execute open the notebook a
   
 ##### Detailed Steps
  
-1. Under **Services**, select search for and select [Amazon SageMaker](https://console.aws.amazon.com/sagemaker)
+2.1. Under **Services**, select search for and select [Amazon SageMaker](https://console.aws.amazon.com/sagemaker)
 ![CreateStack](images/SageMakerDashboard.png) 
 
-2. Click "Open Jupyter"
+2.2. Click "Open Jupyter"
 
-3. This shows the contents
+2.3. This shows the contents
 ![CreateStack](images/JupyterView.png) 
 
-4. Click on "customer_event_prediction_lstm.ipynb" to open the notebook.  
+2.4. Click on "customer_event_prediction_lstm.ipynb" to open the notebook.  
 
-5. For rest of the workshop, execute each cell of the notebook.  
+2.5. For rest of the workshop, follow instructions in the notebook and execute each cell of the notebook.  
