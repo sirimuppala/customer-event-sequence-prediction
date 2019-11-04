@@ -4,8 +4,6 @@
 
 ### Training data consists of a sequence of customer events and the trained model will predict the next sequence of the customer events.  In this particular example, sequence of the customer events is the names of the TV channels viewed.  From this, the trained model will predict the next sequence of channels the customer will view.  The predicted sequence can be used to predict whether a user will view a specific channel or an adverstisement or even rent a particiular movie etc.  This specific event of interest is represent by the word 'visit' in our data set.
 
-### Summary of the algorithm : TODO
-
 # Import the necessary libraries
 import boto3
 import argparse, os
@@ -24,7 +22,7 @@ from sklearn.model_selection import train_test_split
 def read_ndarray_from_s3(s3_prefix):
     s3 = boto3.resource('s3')
     local_file_downloaded = 'downloaded_encoder_data.npy'
-    s3.Bucket("555360056434-sagemaker-us-east-1").download_file(s3_prefix, local_file_downloaded)
+    s3.Bucket(s3_bucket).download_file(s3_prefix, local_file_downloaded)
     downloaded_encoder_input_data = np.load(local_file_downloaded)
     return downloaded_encoder_input_data
 
@@ -36,16 +34,19 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--batchsize', type=int, default=128)
     parser.add_argument('--modeldir', type=str, default='/opt/ml/model')
+    parser.add_argument('--s3_bucket', type=str)
      
     args, _ = parser.parse_known_args()
     
     epoch_num = args.epochs
     batch_size_num = args.batchsize
     model_dir = args.modeldir
+    s3_bucket = args.s3_bucket
    
     print("epoch_num : ", epoch_num)
     print("batch_size_num : ", batch_size_num) 
     print("model_dir :  ", model_dir)
+    print("s3_bucket :  ", s3_bucket)
     
     ##Get the training data from S3
     encoder_input_data = read_ndarray_from_s3("train/train_encoder_input_data.npy")

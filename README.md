@@ -1,11 +1,12 @@
+Consumer behavior can be represented as sequential data describing the interactions through the time. Examples of these interactions could be the items that the user purchases or views.  Modeling this   customer behavior is essentially modeling the customer journey as series of touchpoints.  Understading the sequence of events that leads to a conversion will add tremendous value to the understanding of conversion funnel, impact of types of touchpoints, and even identify high potential leads for retargeting.
 
-This workshop showcases using LSTM on Amazon SageMaker for predicting customer's future events based on the events customers participate in. 
+LSTM networks are well researched and understood in the context of solving sequence prediction problems, especially in natural language processing (NLP) and neural machine translation(NMT).  Along similar lines, if a collection of individual sequence of events are organized as a corpus, then an LSTM model can be constructed to predict the target sequence of events (predicted touchpoint sequence that leads to conversion)
 
-TODO : Add a paragraph about LSTM
+In this workshop, we will use LSTM to predict customer’s future events based on the past events customer participated in.  We will use Amazon SageMaker to build, train and deploy the LSTM model.
 
-This example is based on the session "A novel adoption of LSTM in customer touchpoint prediction" from Strata 2018 conference proceedings.
-(https://conferences.oreilly.com/artificial-intelligence/ai-ca-2018/public/schedule/detail/68831)
-TODO : Add a paragraph to explain the use case.
+(Note : Use of LSTM for this use case is based on the session "A novel adoption of LSTM in customer touchpoint prediction" from Strata 2018 conference proceedings. https://conferences.oreilly.com/artificial-intelligence/ai-ca-2018/public/schedule/detail/68831)
+
+Let’s get started. 
 
 
 ### Prerequisites
@@ -74,7 +75,19 @@ In this step, you will execute a Cloud Formation template to do some initial set
 
 
 #### Step 2 - Build, train and deploy LSTM Model
-
+In this step, you will open the SageMaker notebook instance created in Step 1.  
 To train, deploy the LSTM model and make predictions execute open the notebook and execute each cell.
+  
+##### Detailed Steps
+ 
+1. Under **Services**, select search for and select [Amazon SageMaker](https://console.aws.amazon.com/sagemaker)
+![CreateStack](images/SageMakerDashboard.png) 
 
+2. Click "Open Jupyter"
 
+3. This shows the contents
+![CreateStack](images/JupyterView.png) 
+
+4. Click on "customer_event_prediction_lstm.ipynb" to open the notebook.  
+
+5. For rest of the workshop, execute each cell of the notebook.  

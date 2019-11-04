@@ -4,14 +4,18 @@ Parameters:
   UniqueID: 
     Type: String
     Default: yourinitials
-    Description: Enter your initials in lower case as a unique identifier for components created 
+    Description: Enter your initials in lower case as a unique identifier for components created. Use a minimum of three characters
     AllowedPattern: "^([a-z]|(d(?!d{0,2}.d{1,3}.d{1,3}.d{1,3})))([a-zd]|(.(?!(.|-)))|(-(?!.))){1,61}[a-zd.]$"
 
 Resources:
   SageMakerNotebookLifecycleConfig:
     Type: AWS::SageMaker::NotebookInstanceLifecycleConfig
-    Properties: 
-      NotebookInstanceLifecycleConfigName: "customer-event-prediction-LSTM-Lifecycle-Config"
+    Properties:
+      NotebookInstanceLifecycleConfigName:
+        Fn::Join:
+          - ""
+          - - "customer-event-prediction-LSTM-Lifecycle-Config"
+            - !Ref UniqueID
       OnCreate:
         - Content: 
             Fn::Base64: !Sub |
@@ -29,8 +33,12 @@ Resources:
     Type: AWS::SageMaker::NotebookInstance
     Properties: 
       InstanceType: ml.t3.medium
-      LifecycleConfigName: "customer-event-prediction-LSTM-Lifecycle-Config"
-      NotebookInstanceName: 
+      LifecycleConfigName:
+        Fn::Join:
+          - ""
+          - - "customer-event-prediction-LSTM-Lifecycle-Config"
+            - !Ref UniqueID
+      NotebookInstanceName:
         Fn::Join:
             - ""
             - - "LSTM-CustomerEvent-Notebook-"
@@ -53,7 +61,7 @@ Resources:
       RoleName:
         Fn::Join:
            - ""
-           - - "SageMakerNotebookInstance-ServiceRole-AGAIN"
+           - - "SageMakerNotebookInstance-ServiceRole"
              - !Ref UniqueID
              - "-"
              - !Select
