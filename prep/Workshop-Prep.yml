@@ -22,12 +22,12 @@ Resources:
                 #!/bin/bash
                 set -e
                 sudo -i -u ec2-user bash << EOF
-                echo "Setup the Workshop exercises"
+                echo "Setup the Workshop"
                 pwd
-                git clone https://github.com/aws-samples/amazon-sagemaker-devops-with-ml.git
+                git clone https://github.com/sirimuppala/customer-event-sequence-prediction.git
                 pwd
                 ls -la
-                cp -R /home/ec2-user/amazon-sagemaker-devops-with-ml/1-Built-In-Algorithm/* /home/ec2-user/SageMaker/
+                cp -R /home/ec2-user/customer-event-sequence-prediction/* /home/ec2-user/SageMaker/
 
   SageMakerNotebookInstance:
     Type: AWS::SageMaker::NotebookInstance
