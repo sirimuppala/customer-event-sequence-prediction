@@ -43,12 +43,9 @@ In this step, you will execute a Cloud Formation template to do some initial set
    ![CreateStack](images/CreateStack.png)
    
 1.5. Under **Select Template**:
-    * Click radio button next to 'Upload a template to Amazon S3', then click **Browse...**
-
+    * Click radio button next to 'Upload a template to Amazon S3', then click **Browse**
     * From the local repository cloned to your machine in the detailed step 1, select the file ./prep/Workshop-Prep.yml
-
     * Click **Open**
-    
     ![CreateStack](images/CreateStack-SpecifyTemplate.png)
     
 1.6. Under **Specify Stack Details**, enter: 
