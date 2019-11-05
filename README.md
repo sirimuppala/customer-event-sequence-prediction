@@ -85,6 +85,6 @@ To train, deploy the LSTM model and make predictions execute open the notebook a
 2.3. This shows the contents
 ![CreateStack](images/JupyterView.png) 
 
-2.4. Click on "customer_event_prediction_lstm.ipynb" to open the notebook.  
+2.4. Click on "lstm/customer_event_prediction_lstm.ipynb" to open the notebook.  
 
 2.5. For rest of the workshop, follow instructions in the notebook and execute each cell of the notebook.  
